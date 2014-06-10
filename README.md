@@ -1,4 +1,3 @@
-MPS_AE_Transportdienstleister
+MPS_AE_ExternalComponents
 =============================
-
-MPS_AE_Transportdienstleister
+The Project is using http://www.gradle.org/ as build and dependency management.
