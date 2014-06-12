@@ -48,12 +48,6 @@ dependencies {
     }
 }
 
-tomcat {
-    httpPort = 8080
-    httpsPort = 8081
-    enableSSL = true
-}
-
 jar {
     baseName = 'mpsae-Transport'
     version =  project.version
