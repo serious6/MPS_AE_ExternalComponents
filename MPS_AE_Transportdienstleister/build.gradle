@@ -1,29 +1,68 @@
+buildscript {
+    repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE",
+        'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.3'
+        )
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'jetty'
-apply plugin: 'war'
-apply plugin: 'eclipse-wtp'
-//eclipse {
-//    wtp {
-//        facet {
-//            facet name: 'jst.web', version: '2.5'
-//            facet name: 'java', version: '1.7'
-//            facet name: 'wst.jsdt.web', version: '1.1.0'
-//        }
-//    }
-//}
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'tomcat'
 
 repositories {
+    mavenLocal()
     mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
 }
+
+project.version = '0.0.5'
+
+assert project.hasProperty("version")
 
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
     testCompile group: 'junit', name: 'junit', version: '4.+'
     
     compile (
-    	'org.glassfish.jersey.core:jersey-client:2.9.1',
     	'org.apache.logging.log4j:log4j-core:2.0-rc1',
-    	'org.apache.logging.log4j:log4j-api:2.0-rc1'
+    	'org.apache.logging.log4j:log4j-api:2.0-rc1',
+    	'org.springframework:spring-context:4.0.5.RELEASE',
+    	'org.springframework.boot:spring-boot-starter-web',
+    	'com.fasterxml.jackson.core:jackson-databind'
     )
+    
+        def tomcatVersion = '7.0.11'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+}
+
+tomcat {
+    httpPort = 8080
+    httpsPort = 8081
+    enableSSL = true
+}
+
+jar {
+    baseName = 'mpsae-Transport'
+    version =  project.version
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
 }
