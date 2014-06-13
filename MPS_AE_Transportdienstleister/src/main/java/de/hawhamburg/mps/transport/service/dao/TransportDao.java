@@ -5,12 +5,13 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import de.hawhamburg.mps.transport.transObjects.TransportObject;
 
-public class TransportService {
-
+@Repository
+public class TransportDao {
 	private final HashSet<TransportObject> theObjects = new HashSet<TransportObject>();
 	private final AtomicInteger counter = new AtomicInteger();
 
@@ -43,5 +44,4 @@ public class TransportService {
 		Assert.notNull(theObject);
 		return theObject;
 	}
-
 }
