@@ -15,7 +15,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 public class MpsAdapter {
 	private final Logger logger = LogManager.getLogger(this.getClass());
 
-	private final static String QUEUE_NAME = "hello";
+	private final static String QUEUE_NAME = "hapsar";
 	private boolean run = true;
 
 	public MpsAdapter() throws IOException {
@@ -46,13 +46,18 @@ public class MpsAdapter {
 
 		logger.info("MpsAdapter is ready and waiting for Messages...");
 		while (isRunning()) {
+			QueueingConsumer.Delivery delivery = null;
 			try {
-				QueueingConsumer.Delivery delivery = null;
 				delivery = consumer.nextDelivery();
 				String message = new String(delivery.getBody());
-				logger.info(String.format("[x] Received %s", message));
-			} catch (ShutdownSignalException | ConsumerCancelledException
-					| InterruptedException e) {
+				logger.info("[x] Received " + message);
+			} catch (ShutdownSignalException e) {
+				cancel();
+				logger.error(e);
+			} catch (ConsumerCancelledException e) {
+				cancel();
+				logger.error(e);
+			} catch (InterruptedException e) {
 				cancel();
 				logger.error(e);
 			}

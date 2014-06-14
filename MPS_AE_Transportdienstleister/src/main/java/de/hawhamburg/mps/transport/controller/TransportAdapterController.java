@@ -42,7 +42,7 @@ public class TransportAdapterController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/status")
 	public @ResponseBody
-	String showStatus() {
+	String showStatus() throws Exception {
 		logger.info("Recieved get on '/status'");
 		logger.info("TransportService is "
 				+ (transportService != null ? "running" : "offline"));
@@ -50,8 +50,7 @@ public class TransportAdapterController {
 	}
 
 	@ExceptionHandler(Exception.class)
-	public @ResponseBody
-	ModelAndView errorHandler(HttpServletRequest req, Exception exception) {
+	public ModelAndView errorHandler(HttpServletRequest req, Exception exception) {
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.addObject("exception", exception);
 		modelAndView.addObject("url", req.getRequestURL());

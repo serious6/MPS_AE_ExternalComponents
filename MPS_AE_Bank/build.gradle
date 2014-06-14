@@ -1,9 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 repositories {
+	mavenLocal()
     mavenCentral()
 }
+
+project.version = '0.0.5'
+
+assert project.hasProperty("version")
 
 dependencies {
         compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
@@ -12,8 +18,14 @@ dependencies {
     compile(
     	'org.apache.logging.log4j:log4j-core:2.0-rc1',
     	'org.apache.logging.log4j:log4j-api:2.0-rc1',
-    	'com.rabbitmq:amqp-client:3.3.1'
+    	'com.rabbitmq:amqp-client:3.3.1',
+    	'commons-cli:commons-cli:1.2'
     )
+}
+
+jar {
+    baseName = 'mpsae-Bank'
+    version =  project.version
 }
 
 uploadArchives {
