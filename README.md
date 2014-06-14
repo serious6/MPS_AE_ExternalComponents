@@ -6,12 +6,12 @@ For contributing to this project:
 * install eclipse `gradle-plugin`
 
 
-Bank
+Transport
 -------
 * Start tomcat with `gradle bootRun`
 
  
-Transport
+Bank
 -------
 * Download [rabbit-mq](https://www.rabbitmq.com/download.html)
 * Install management-plugin `rabbitmq-plugins enable rabbitmq_management`
