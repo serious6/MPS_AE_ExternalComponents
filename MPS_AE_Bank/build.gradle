@@ -1,11 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = 'de.hawhamburg.mps.bank.hapser.payment.Starter'
 
 repositories {
 	mavenLocal()
     mavenCentral()
 }
+
 
 project.version = '0.0.5'
 
@@ -24,7 +28,7 @@ dependencies {
 }
 
 jar {
-    baseName = 'mpsae-Bank'
+    baseName = 'hapsar-payment'
     version =  project.version
 }
 

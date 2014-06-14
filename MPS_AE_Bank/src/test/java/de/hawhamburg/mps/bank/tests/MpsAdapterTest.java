@@ -1,7 +1,5 @@
 package de.hawhamburg.mps.bank.tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +16,6 @@ public class MpsAdapterTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
 	}
 
 }

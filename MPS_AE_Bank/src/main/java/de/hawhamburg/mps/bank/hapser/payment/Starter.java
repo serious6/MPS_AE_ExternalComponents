@@ -19,6 +19,7 @@ public class Starter {
 	private static final HashMap<String, String> cmdLine = new HashMap<String, String>();
 
 	public static void main(String[] args) {
+		logger.info("Startup");
 		try {
 			// create Options object
 			Options options = new Options();
