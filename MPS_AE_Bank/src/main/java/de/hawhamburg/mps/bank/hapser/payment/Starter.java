@@ -45,7 +45,7 @@ public class Starter {
 			}
 
 			QueueDao queueDao = new QueueDao(cmdLine.containsKey("v"));
-
+			queueDao.send(cmdLine);
 		} catch (Exception e) {
 			logger.error(e);
 		}

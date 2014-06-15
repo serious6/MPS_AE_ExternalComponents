@@ -1,7 +1,13 @@
 package de.hawhamburg.mps.bank.hapser.payment.dao;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,13 +28,39 @@ public class QueueDao {
 		this.verbose = verbose;
 	}
 
+	/**
+	 * 
+	 * @param cmd
+	 * @throws IOException
+	 */
 	public void send(HashMap<String, String> cmd) throws IOException {
-		String json = "";
-		// FIXME make a json
-
+		String json = Json.createObjectBuilder()
+				.add("transaction", getTransaction(cmd)).build().toString();
 		send(json);
 	}
 
+	/**
+	 * 
+	 * @param cmd
+	 * @return
+	 */
+	private JsonArrayBuilder getTransaction(HashMap<String, String> cmd) {
+		JsonObjectBuilder obj = Json.createObjectBuilder();
+		JsonArrayBuilder objectBuilder = Json.createArrayBuilder();
+		for (String key : cmd.keySet()) {
+			obj.add(key, cmd.get(key));
+		}
+		obj.add("time",
+				new SimpleDateFormat("yyyyMMddHHmmssZ").format(new Date()));
+		objectBuilder.add(obj);
+		return objectBuilder;
+	}
+
+	/**
+	 * 
+	 * @param json
+	 * @throws IOException
+	 */
 	private void send(String json) throws IOException {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
