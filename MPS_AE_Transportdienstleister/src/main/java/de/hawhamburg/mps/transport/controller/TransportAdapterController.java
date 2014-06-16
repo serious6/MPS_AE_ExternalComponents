@@ -49,6 +49,12 @@ public class TransportAdapterController {
 		return "Running...";
 	}
 
+	@RequestMapping(method = RequestMethod.POST, value = "/post")
+	public void post() {
+		logger.info("Recieved POST on '/post'");
+		transportService.store(new TransportObject());
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ModelAndView errorHandler(HttpServletRequest req, Exception exception) {
 		ModelAndView modelAndView = new ModelAndView("index");
