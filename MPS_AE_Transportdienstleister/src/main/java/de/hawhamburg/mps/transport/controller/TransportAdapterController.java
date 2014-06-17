@@ -49,9 +49,10 @@ public class TransportAdapterController {
 		return "Running...";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/post")
-	public void post() {
-		logger.info("Recieved POST on '/put'");
+	@RequestMapping(method = RequestMethod.PUT, value = "/ship/{id}")
+	public @ResponseBody
+	void ship(@PathVariable(value = "id") int id) {
+		logger.info("Recieved PUT on '/ship' with id " + id);
 		transportService.store(new TransportObject());
 	}
 
