@@ -33,11 +33,11 @@ public class QueueDao {
 	 * @param cmd
 	 * @throws IOException
 	 */
-	public void send(HashMap<String, String> cmd) throws IOException {
-		String json = Json.createObjectBuilder()
-				.add("transaction", getTransaction(cmd)).build().toString();
-		send(json);
-	}
+//	public void send(HashMap<String, String> cmd) throws IOException {
+//		String json = Json.createObjectBuilder()
+//				.add("transaction", getTransaction(cmd)).build().toString();
+//		send(json);
+//	}
 
 	/**
 	 * 
@@ -61,7 +61,7 @@ public class QueueDao {
 	 * @param json
 	 * @throws IOException
 	 */
-	private void send(String json) throws IOException {
+	public void send(String json) throws IOException {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
 		Connection connection = factory.newConnection();

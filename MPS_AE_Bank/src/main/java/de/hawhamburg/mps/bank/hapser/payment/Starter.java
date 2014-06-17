@@ -25,7 +25,7 @@ public class Starter {
 			Options options = new Options();
 			// add t option
 			options.addOption("r", true, "Rechnungsnummer");
-			options.addOption("b", true, "Betrag in €");
+			options.addOption("b", true, "Betrag in ï¿½");
 			options.addOption("v", false, "verbose");
 
 			HelpFormatter formatter = new HelpFormatter();
@@ -45,7 +45,7 @@ public class Starter {
 			}
 
 			QueueDao queueDao = new QueueDao(cmdLine.containsKey("v"));
-			queueDao.send(cmdLine);
+			queueDao.send("{\"id\":" + cmd.getOptionValue("r") + ",\"value\":" + cmd.getOptionValue("b") + "}");
 		} catch (Exception e) {
 			logger.error(e);
 		}
