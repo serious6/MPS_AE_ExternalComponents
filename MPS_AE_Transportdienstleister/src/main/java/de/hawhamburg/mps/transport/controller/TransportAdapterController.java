@@ -29,21 +29,21 @@ public class TransportAdapterController {
 	@RequestMapping(method = RequestMethod.GET, value = "/show/{id}")
 	public @ResponseBody
 	TransportObject showBusyness(@PathVariable(value = "id") int id) {
-		logger.info("Recieved get on '/show/{id}'");
+		logger.info("Received get on '/show/{id}'");
 		return transportService.findById(id);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/show")
 	public @ResponseBody
 	Set<TransportObject> showAll() {
-		logger.info("Recieved get on '/show'");
+		logger.info("Received get on '/show'");
 		return transportService.showAll();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/status")
 	public @ResponseBody
 	String showStatus() throws Exception {
-		logger.info("Recieved get on '/status'");
+		logger.info("Received get on '/status'");
 		logger.info("TransportService is "
 				+ (transportService != null ? "running" : "offline"));
 		return "Running...";
@@ -52,7 +52,7 @@ public class TransportAdapterController {
 	@RequestMapping(method = RequestMethod.PUT, value = "/ship/{id}")
 	public @ResponseBody
 	void ship(@PathVariable(value = "id") int id) {
-		logger.info("Recieved PUT on '/ship' with id " + id);
+		logger.info("Received PUT on '/ship' with id " + id);
 		transportService.store(new TransportObject());
 	}
 
